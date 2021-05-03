@@ -1,0 +1,32 @@
+version: "3.4"
+services:
+  mq:
+    image: rabbitmq:3.7-management-alpine
+    hostname: test-rabbit
+    volumes:
+      - ./.rabbit_data:/var/lib/rabbitmq
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+
+  db:
+    image: postgres:11.5-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: 'study'
+      POSTGRES_PASSWORD: '123'
+      POSTGRES_DB: 'study'
+    volumes:
+      - ./.postgres_data:/var/lib/postgresql/data
+
+  cache:
+    image: redis:6.2-alpine
+    command: redis-server --appendonly yes
+    environment:
+      PORT: 6380
+      PASS: 123
+    ports:
+      - '6380:6380'
+    volumes:
+      - ./.redis_data:/data
