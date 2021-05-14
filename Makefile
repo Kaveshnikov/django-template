@@ -19,4 +19,4 @@ migrate:
 migrations:
 	python $(root_dir)/src/manage.py makemigrations $(args)
 
-.PHONY: build test runserver
+.PHONY: start build test runserver migrate migrations
