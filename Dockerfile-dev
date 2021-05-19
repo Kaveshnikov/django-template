@@ -14,10 +14,10 @@ RUN apt-get update && apt-get install --no-install-recommends --yes \
     gcc g++ libpq-dev libpcre3-dev
 
 
-COPY requirements.txt .
+COPY requirements.txt requirements-dev.txt ./
 
-RUN pip install -r requirements.txt
+RUN pip install -r requirements-dev.txt
 
-COPY src/ uwsgi.ini ./
+COPY src/ pytest.ini uwsgi.ini ./
 
 CMD ["uwsgi", "uwsgi.ini"]

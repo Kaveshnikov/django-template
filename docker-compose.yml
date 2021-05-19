@@ -18,7 +18,7 @@ services:
       POSTGRES_PASSWORD: '123'
       POSTGRES_DB: 'project'
     volumes:
-      - ./.postgres_data:/var/lib/postgresql/data
+      - ./.postgres_data/data:/var/lib/postgresql/data
 
   cache:
     image: redis:6.2-alpine
@@ -43,4 +43,6 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-dev
+    environment:
+      DB_HOST: db
